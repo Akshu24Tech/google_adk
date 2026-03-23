@@ -1,83 +1,72 @@
 # 🏦 AI Personal Finance Advisor
 
-[![Gemini 1.5](https://img.shields.io/badge/Model-Gemini%202.0-blue.svg)](https://deepmind.google/technologies/gemini/)
+[![Gemini 2.0](https://img.shields.io/badge/Model-Gemini%202.0-blue.svg)](https://deepmind.google/technologies/gemini/)
 [![Powered by ADK](https://img.shields.io/badge/Framework-Google%20ADK-orange.svg)](https://google.github.io/adk-docs/)
 [![Deployment-Vertex AI](https://img.shields.io/badge/Deployment-Vertex%20AI-green.svg)](https://cloud.google.com/vertex-ai)
 
 A sophisticated, multi-agent financial intelligence system designed for strategic planning, expense analysis, and personalized financial coaching. Built with the **Google Agent Development Kit (ADK)** and **Gemini 2.0**, this system provides a secure, expert-level consulting experience.
 
-![Finance Advisor Dashboard](frontend/screenshot.png)
-*Figure 1: The Advisor's Premium Streamlit Interface, featuring real-time guardrail monitoring and execution mode toggling.*
+---
 
-## 🌟 Core Intelligence & Features
+## 📸 Visual Walkthrough
 
-### 1. Hierarchical Multi-Agent Orchestration
-The advisor utilizes a powerful three-tier architecture to deliver precision advice:
-*   **Intent Tier**: Classifies user queries (Budget, Goal, Investment, etc.) and analyzes potential risks.
-*   **Specialist Tier**: Five dedicated LLM Agents equipped with specialized tools:
-    *   **ExpenseAnalyzer**: Identifies spending leaks and savings opportunities.
-    *   **BudgetAdvisor**: Generates optimized monthly allocation plans.
-    *   **GoalTracker**: Uses an iterative `LoopAgent` to refine long-term financial milestones.
-    *   **CurrencyConverter**: Accesses real-time exchange rates for global planning.
-    *   **FinanceTutor**: Provides deep dives into complex financial concepts using web research.
-*   **Synthesis Tier**: Aggregates specialist findings into a cohesive, structured advisor response.
+### 1. The Executive Dashboard (Streamlit)
+The user-facing dashboard provides a clean, premium interface for daily financial management.
+![Streamlit Dashboard](frontend/screenshot.png)
 
-### 2. Enterprise-Grade Security (Guardrails)
-*   **PII Redaction**: All sensitive user data (Emails, Phone Numbers, SSNs) is automatically masked before reaching the LLM.
-*   **Model-Based Safety Shield**: A dedicated "Screening Agent" validates every query against institutional safety standards before execution.
+### 2. The Developer Workshop (ADK Web)
+Monitor the internal "thinking" process, tool calls, and agent transitions in real-time using the ADK Developer UI.
+![ADK Web UI](frontend/adk_web_screenshot.png)
 
-### 3. Dual-Mode Deployment
-Seamlessly transition between **Local Development** (directly via Python/Streamlit) and **Production** (Vertex AI Reasoning Engine).
+---
 
-## 🛠️ Setup & Operations
+## 🌟 How It Works: The Orchestration Layer
 
-### Environment Configuration
-Create a `.env` file in the project root:
-```env
-GOOGLE_API_KEY='your_gemini_api_key'
-GOOGLE_GENAI_MODEL='gemini-2.0-flash-lite-preview-02-05'
+The Finance Advisor isn't just one bot—it's a team of specialized AI experts working in a **Multi-Tier Pipeline**:
 
-# GCP Production Settings
-PROJECT_ID='your-gcp-project-id'
-LOCATION='us-central1'
-STAGING_BUCKET='gs://your-deployment-bucket'
-RESOURCE_ID='your-vertex-resource-id'
-```
+### 🛡️ Tier 1: Security & Guardrails (The Shield)
+*   **PII Redaction**: Automatically scrubs sensitive data (Emails, SSNs) before it hits the LLMs.
+*   **Safety Screen**: Every query is filtered by a dedicated screening agent to ensure advice meets institutional safety standards.
 
-### Quick Installation
+### 🧠 Tier 2: Intent & Routing (The Brain)
+*   **Classifier**: Uses a Pydantic-mapped schema to identify the user's core intent.
+*   **Finance Router**: Dynamically selects the best specialist tool for the job.
+
+### 💼 Tier 3: Specialist Execution (The Experts)
+*   **Expense Analyzer**: Digs into spending patterns to find hidden savings.
+*   **Budget Advisor**: Uses custom Python tools to calculate complex monthly allocations.
+*   **Goal Tracker**: An iterative `LoopAgent` that refines your goals until they are mathematically sound.
+*   **Currency Converter**: Connects to real-time market data for international planning.
+*   **Finance Tutor**: Performs deep-dive web research to answer "What is...?" questions.
+
+---
+
+## 🛠️ Quick Start Guide
+
+### 1. Setup Environment
+Clone the repo and create your `.env` file from the template:
 ```bash
-# Set up virtual environment
-python -m venv .venv
-source .venv/bin/activate  # Or .venv\Scripts\activate on Windows
+cp .env.example .env
+# Open .env and paste your GOOGLE_API_KEY and PROJECT_ID
+```
 
-# Install core dependencies
+### 2. Install & Run
+```bash
+# Install dependencies
 pip install -r requirements.txt
+
+# Run the Premium Dashboard
+streamlit run frontend/app.py
+
+# Run the Developer UI (to see the "Agent Logic")
+adk web
 ```
 
-### Execution Commands
-| Task | Command |
-| :--- | :--- |
-| **Run Dashboard** | `streamlit run frontend/app.py` |
-| **Verify Agent** | `python verify_agent.py` |
-| **GCP Deploy** | `python deploy/deploy.py` |
-| **Resource Cleanup**| `python deploy/cleanup.py` |
-
-## 🏗️ Architecture Visualization
-
-```mermaid
-graph TD
-    User([User Prompt]) --> Redaction[PII Redaction Layer]
-    Redaction --> Shield{Safety Shield Agent}
-    Shield -- PASS --> Classifier[Intent Classifier]
-    Shield -- BLOCK --> Reject([Safety Warning])
-    Classifier --> Router[Finance Router]
-    Router --> Specialists{Specialist Pool}
-    Specialists -- Goal Tracking --> Loop[Loop Agent]
-    Specialists -- General Advice --> LLM[Llm Agent]
-    Specialists --> Tools[Tool Call: Search/Calc/Conv]
-    Specialists --> Formatter[Response Formatter]
-    Formatter --> UI([Streamlit Dashboard])
+## 🚀 Cloud Deployment
+Ready for production? Deploy your advisor as a **Vertex AI Reasoning Engine** with one command:
+```bash
+python deploy/deploy.py
 ```
 
-## 📜 Disclaimer
-*This system is an AI-driven tool for information and educational purposes only. It does not constitute professional financial, tax, or legal advice. Always consult with a licensed professional before making significant financial decisions.*
+---
+*Disclaimer: This system is for educational purposes. Always consult a human financial professional for significant financial decisions.*
