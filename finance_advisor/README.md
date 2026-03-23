@@ -40,8 +40,61 @@ The Finance Advisor isn't just one bot—it's a team of specialized AI experts w
 *   **Finance Tutor**: Performs deep-dive web research to answer "What is...?" questions.
 
 ---
+## 📊 System Architecture
 
-## 🛠️ Quick Start Guide
+The following flowchart illustrates the multi-agent orchestration pipeline, from initial user query to final financial advice.
+
+```mermaid
+graph TD
+    User([User Query]) --> Tier1[Tier 1: Security & Guardrails]
+    
+    subgraph Tier1_Shield [The Shield]
+    Tier1 --> PII[PII Redaction]
+    PII --> Safety[Safety Screen]
+    end
+    
+    Safety --> Tier2[Tier 2: Intent & Routing]
+    
+    subgraph Tier2_Brain [The Brain]
+    Tier2 --> Classifier[Intent Classifier]
+    Classifier --> Router[Finance Router]
+    end
+    
+    Router --> Tier3[Tier 3: Specialist Execution]
+    
+    subgraph Tier3_Experts [The Experts]
+    direction TB
+    EA[Expense Analyzer]
+    BA[Budget Advisor]
+    CC[Currency Converter]
+    FT[Finance Tutor]
+    
+    subgraph Loop [Goal Tracker Loop]
+    GP[Goal Proposer] <--> GE[Goal Evaluator]
+    end
+    end
+    
+    Router -.-> EA
+    Router -.-> BA
+    Router -.-> CC
+    Router -.-> FT
+    Router -.-> Loop
+    
+    EA --> Formatter[Response Formatter]
+    BA --> Formatter
+    CC --> Formatter
+    FT --> Formatter
+    Loop --> Formatter
+    
+    Formatter --> Output([Final Advisor Response])
+
+    style Tier1_Shield fill:#f9f,stroke:#333,stroke-width:2px
+    style Tier2_Brain fill:#bbf,stroke:#333,stroke-width:2px
+    style Tier3_Experts fill:#dfd,stroke:#333,stroke-width:2px
+```
+
+---
+
 
 ### 1. Setup Environment
 Clone the repo and create your `.env` file from the template:
