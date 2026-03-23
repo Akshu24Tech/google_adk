@@ -1,0 +1,8 @@
+streamlit
+google-cloud-aiplatform[adk,agent_engines]
+python-dotenv
+google-generativeai
+litellm
+pydantic
+requests
+streamlit-local-storage

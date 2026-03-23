@@ -1,0 +1,79 @@
+/* frontend/style.css */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+
+:root {
+    --primary: #1e3a8a; /* Deep Navy */
+    --accent: #ca8a04; /* Gold */
+    --background: #0f172a; /* Slate Dark */
+    --surface: #1e293b;
+    --text: #f8fafc;
+    --text-muted: #94a3b8;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+}
+
+/* Glassmorphism for sidebar and containers */
+.stSidebar {
+    background-color: var(--surface) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Chat Message Styling */
+.stChatMessage {
+    border-radius: 12px !important;
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stChatMessage[data-testid="stChatMessage-user"] {
+    background-color: rgba(30, 58, 138, 0.4) !important;
+}
+
+.stChatMessage[data-testid="stChatMessage-assistant"] {
+    background-color: rgba(30, 41, 59, 0.8) !important;
+}
+
+/* Buttons and Interactives */
+.stButton button {
+    background-color: var(--primary) !important;
+    color: white !important;
+    border-radius: 8px !important;
+    border: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.stButton button:hover {
+    background-color: var(--accent) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(202, 138, 4, 0.3);
+}
+
+/* Header styling */
+h1, h2, h3 {
+    color: var(--accent) !important;
+    font-weight: 600 !important;
+}
+
+.advisor-header {
+    background: linear-gradient(135deg, var(--primary), #1d4ed8);
+    padding: 2rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    background: rgba(202, 138, 4, 0.2);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+}

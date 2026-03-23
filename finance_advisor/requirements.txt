@@ -1,0 +1,7 @@
+google-adk[extensions]
+google-generativeai 
+python-dotenv
+litellm
+pydantic 
+requests
+google-cloud-aiplatform[adk,agent_engines]
